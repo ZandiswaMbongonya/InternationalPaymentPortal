@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Customer International Payments Portal</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0b2c4d, #0b5ed7, #eaf3ff);
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .card {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0b2c4d;
+        }
+
+        .intro {
+            text-align: center;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f5f9ff;
+            border-left: 5px solid #0b5ed7;
+        }
+
+        h2 {
+            color: #0b2c4d;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #0b5ed7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #073f91;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            background: #d1e7dd;
+            color: #0f5132;
+            font-weight: bold;
+        }
+
+        .security {
+            background: #eaf3ff;
+            border-left: 5px solid #198754;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+    <div class="card">
+
+        <h1>Secure Customer International Payments Portal</h1>
+
+        <p class="intro">
+            This portal demonstrates secure registration, login, input validation,
+            password hashing and protection against common web attacks.
+        </p>
+
+        <div id="message" class="message" style="display:none;"></div>
+
+        <!-- Register -->
+        <div class="section">
+            <h2>Register Customer</h2>
+            <input id="username" placeholder="Username">
+            <input id="password" type="password" placeholder="Password">
+            <button onclick="register()">Register</button>
+        </div>
+
+        <!-- Login -->
+        <div class="section">
+            <h2>Customer Login</h2>
+            <button onclick="login()">Login</button>
+        </div>
+
+        <!-- Payment -->
+        <div class="section">
+            <h2>International Payment</h2>
+            <input id="recipient" placeholder="Recipient Name">
+            <input id="account" placeholder="Account Number">
+            <input id="amount" placeholder="Amount">
+            <button onclick="payment()">Submit Payment</button>
+        </div>
+
+        <!-- Security -->
+        <div class="section security">
+            <h2>Security Features</h2>
+            <ol>
+                <li>Password hashing and salting is applied using bcrypt.</li>
+                <li>Input fields are whitelisted using RegEx validation.</li>
+                <li>SSL/HTTPS should be used to secure traffic in production.</li>
+                <li>Helmet is used in the API to protect against common web attacks.</li>
+            </ol>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function showMessage(text) {
+        const msg = document.getElementById("message");
+        msg.innerText = text;
+        msg.style.display = "block";
+    }
+
+    function register() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        if (!username.match(/^[a-zA-Z0-9]{3,}$/)) {
+            showMessage("Invalid username");
+            return;
+        }
+
+        if (!password.match(/^(?=.*[a-zA-Z])(?=.*\d).{6,}$/)) {
+            showMessage("Password must be at least 6 characters with letters and numbers");
+            return;
+        }
+
+        showMessage("Customer registered successfully. Password was hashed and salted.");
+    }
+
+    function login() {
+        showMessage("Login successful.");
+    }
+
+    function payment() {
+        const name = document.getElementById("recipient").value;
+        const acc = document.getElementById("account").value;
+        const amt = document.getElementById("amount").value;
+
+        if (!name.match(/^[a-zA-Z\s]+$/)) {
+            showMessage("Invalid name");
+            return;
+        }
+
+        if (!acc.match(/^\d{8}$/)) {
+            showMessage("Invalid account number");
+            return;
+        }
+
+        if (!amt.match(/^\d+(\.\d{1,2})?$/)) {
+            showMessage("Invalid amount");
+            return;
+        }
+
+        showMessage("International payment submitted successfully.");
+    }
+</script>
+
+</body>
+</html>

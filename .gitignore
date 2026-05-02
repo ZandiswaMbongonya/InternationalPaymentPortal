@@ -18,7 +18,8 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-# Editor / IDE settings
+# Editor / IDE junk
 .vscode/
 .vs/
+vs/
 
